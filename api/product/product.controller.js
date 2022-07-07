@@ -1,3 +1,4 @@
+const uploadMedia = require("../../utils/uploadMedia");
 const {
     createProduct,
     deleteProduct,
@@ -16,8 +17,10 @@ const {
   }
   
   async function createProductHandler(req, res) {
+    console.log(req.body)
     const productData = req.body;
     try {
+      uploadMedia(req.body.file);
       const product = await createProduct(productData);
       return res.status(200).json(product);
     } catch(err) {
